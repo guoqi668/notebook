@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>页面布局</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .layout article div {
+            height:100px;
+        }
+        .layout.float .left {
+            width:300px;
+            float: left;
+            background-color: red;
+        }
+        .layout.float .right{
+            width: 300px;
+            float: right;
+            background-color: green;
+        }
+        .layout.float .center {
+            background-color: yellow;
+        }
+
+        .layout.table {
+            display: table-row;
+        }
+        .layout.table .left {
+            width: 300px;
+            background-color: red;
+            display: table-cell;
+        }
+        .layout.table .right {
+            width: 300px;
+            background-color: green;
+            display: table-cell;
+        }
+        .layout.table .center {
+            background-color: yellow;
+            display: table-cell;
+        }
+
+        .layout.absolute  {
+            /*position: relative;*/
+            height: 100px;
+        }
+        .layout.absolute .left {
+            left: 0;
+            position: absolute;
+            width: 300px;
+            background-color: red;
+        }
+        .layout.absolute .right {
+            right: 0;
+            position: absolute;
+            width: 300px;
+            background-color: green;
+        }
+        .layout.absolute .center {
+            position: absolute;
+            left: 300px;
+            right: 300px;
+            background-color: blue;
+        } 
+
+
+        .layout.flexbox>.left-right-center {
+            display: flex;
+        }
+        .layout.flexbox .left{
+            width: 300px;
+            background-color: red;
+        }
+        .layout.flexbox .right {
+            width: 300px;
+            background-color: green;
+        }
+        .layout.flexbox .center {
+            flex: 0 1 auto;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <!-- 高度已知，左右宽度300px 中间自适应 -->
+    <section class="layout float">
+        <article class="left-right-center">
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="center">
+                浮动解决方案
+            </div>
+        </article>
+    </section>
+
+    <!-- table-cell 等高布局 -->
+    <section class="layout table">
+        <article class="left-right-center">
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="center">
+                table-cell解决方案
+            </div>
+        </article>
+    </section>
+
+    <!-- 绝对定位 -->
+    <section class="layout absolute">
+        <article class="left-right-center">
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="center">
+                定位解决方案
+            </div>
+        </article>
+    </section>
+
+     <!-- flexbox -->
+    <section class="layout flexbox">
+        <article class="left-right-center">
+            <div class="left"></div>
+            <div class="center">
+                flexbox解决方案
+            </div>
+            <div class="right"></div>
+
+            
+        </article>
+    </section>
+
+</body>
+</html>
