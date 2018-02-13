@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Bubbling</title>
+</head>
+<body>
+  <button id="clickMe">Click Me</button>
+  <div onclick="show('a')" style="width:200px;height:200px;background-color: red;">
+         <p onclick="show('b')">fff</p>
+  </div>
+</body>
+<script>
+
+var button = document.getElementById('clickMe');
+
+button.onclick = function() {
+  console.log('1. You click Button');
+};
+document.body.onclick = function() {
+  console.log('2. You click body');
+};
+document.onclick = function() {
+  console.log('3. You click document');
+};
+window.onclick = function() {
+  console.log('4. You click window');
+};
+
+function show(info){
+    console.log(event.target)
+    event.stopPropagation();
+             alert(info);
+}
+</script>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css盒模型</title>
+    <style>
+        #sec {
+            background-color: green;
+            /*解决父子元素边距重叠*/
+            overflow: hidden; 
+        }
+        .child {
+            height: 100px;
+            background-color: red;
+            margin-top: 10px;
+            margin-bottom: 50px;
+        }
+        #margin {
+            overflow: auto;
+            background-color: pink;
+        }
+        #margin>p {
+            margin: 5px 0px 25px;
+            display: inline-block;
+            width: 100%
+            background-color: red;
+        }
+
+
+        /*浮动清除*/
+        #float {
+            background-color: red;
+            /*overflow: auto;*/
+            float: left;
+        }
+        /*#float::after {
+            display: block;
+            content: '';
+            clear: both;
+        }*/
+        /*.clear {
+            clear:both;
+        }*/
+        .float {
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- 盒模型边距重叠 -->
+    <section id="sec">
+        <article class="child">
+            
+        </article>
+    </section>
+
+    <!-- 垂直方向边距重叠问题 -->
+    <section id="margin">
+        <p>1</p>
+        <p>2</p>
+        <p>4</p>
+    </section>
+
+    <!-- 浮动 -->
+    <section id="float">
+        <div class="float">我是浮动元素</div>
+        <div class="clear"></div>
+    </section>
+    <div style="background-color: green;height: 40px;float:left;">ddd</div>
+</body>
+</html>

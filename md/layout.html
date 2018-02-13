@@ -1022,7 +1022,7 @@ body .markdown-body
 <li>等高布局</li>
 </ul>
 <h2 id="flex-this-link"><a name="user-content-flex-this-link" href="#flex-this-link" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>flex布局 <a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html">This link</a></h2>
-<h4 id="flex"><a name="user-content-flex" href="#flex" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>flex容器属性</h4>
+<h5 id="flex"><a name="user-content-flex" href="#flex" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>flex容器属性</h5>
 <ul>
 <li>
 <p><code>flex-direction: row | row-reverse | column | column-reverse;</code> 主轴方向</p>
@@ -1043,7 +1043,7 @@ body .markdown-body
 <p><code>align-content</code> 多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用</p>
 </li>
 </ul>
-<h4 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>项目属性</h4>
+<h5 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>项目属性</h5>
 <ul>
 <li>
 <p><code>order</code> 定义项目的排列顺序。数值越小，排列越靠前，默认为0</p>
@@ -1063,4 +1063,135 @@ body .markdown-body
 <li>
 <p><code>align-self: auto | flex-start | flex-end | center | baseline | stretch;</code> 属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的<code>align-items</code>属性，如果没有父元素，则等同于stretch</p>
 </li>
+</ul>
+<h2 id="this-link"><a name="user-content-this-link" href="#this-link" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>网格布局 <a href="https://www.w3cplus.com/css3/line-base-placement-layout.html">This link</a></h2>
+<h2 id="css"><a name="user-content-css" href="#css" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>css盒模型</h2>
+<p>content+padding+border+margin</p>
+<ul>
+<li>IE模型和标准模型两种盒模型的区别</li>
+</ul>
+<blockquote>
+<p>区别在于宽和高的计算方式不同。 标准模型宽度和高度不包括 border和 padding</p>
+</blockquote>
+<h5 id="css_1"><a name="user-content-css_1" href="#css_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>css如何设置这两种模型</h5>
+<pre><code>box-sizing: content-box;  //默认 标准模式
+box-sizing: border-box; // IE模型
+</code></pre>
+
+<h5 id="js"><a name="user-content-js" href="#js" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>js如何获取盒模型对应的宽和高</h5>
+<pre><code>dom.style.width/height; // 只能获取行内的宽高；
+dom.currentStyle.width/height; // 只对ie有效；
+window.getComputedStyle(dom).width/height; //主流浏览器；
+</code></pre>
+
+<h5 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>根据盒模型解释边距重叠</h5>
+<blockquote>
+<p>边界重叠是指两个或多个盒子的相邻边界重合在一起而形成一个单一边界</p>
+</blockquote>
+<p>内层元素 加float:left;或display:inline-block;<br />
+外层元素 overflow:hidden;</p>
+<p><pre><code>#sec {
+    background-color: green;
+    /*解决父子元素边距重叠*/
+    overflow: hidden/auto; 
+}
+.child {
+    height: 100px;
+    background-color: red;
+    margin-top: 10px;
+}
+
+ &lt;section id=&quot;sec&quot;&gt;
+        &lt;article class=&quot;child&quot;&gt;
+
+        &lt;/article&gt;
+    &lt;/section&gt;
+</code></pre><br />
+为什么加overflow:hidden;就能解决？是因为创建了BFC</p>
+<h5 id="bfc"><a name="user-content-bfc" href="#bfc" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>BFC（边距重叠解决方案）</h5>
+<ul>
+<li>概念：</li>
+<li>BFC原理：</li>
+<li>如何创建BFC：</li>
+</ul>
+<h5 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>清除浮动方式</h5>
+<ul>
+<li>通过overflow属性清除浮动 （创建一个bfc元素）</li>
+<li>使用伪元素来清除浮动</li>
+<li>添加空元素</li>
+</ul>
+<h2 id="dom"><a name="user-content-dom" href="#dom" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>DOM事件</h2>
+<ul>
+<li>
+<h4 id="dom_1"><a name="user-content-dom_1" href="#dom_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>DOM事件模型</h4>
+<h5 id="dom_2"><a name="user-content-dom_2" href="#dom_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>DOM事件模型分为两类</h5>
+<p>&ndash; 事件冒泡和事件捕获<br />
+<small><em>IE采用的是事件冒泡的形式。</em></small></p>
+<p>阻止事件冒泡<br />
+<pre><code>e = e || window.event;
+if (e.stopPropagation) {       
+    e.stopPropagation(); 
+}else {            
+    e.cancelBubble = true; 
+}
+</code></pre></p>
+<p>阻止事件的默认行为<br />
+- 在W3c中，使用preventDefault（）方法；<br />
+- 在IE下设置window.event.returnValue = false;</p>
+<h5 id="dom_3"><a name="user-content-dom_3" href="#dom_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>DOM事件模型分为三个等级</h5>
+<p>&ndash; DOM0 <br />
+<pre><code>element.onclick=function(){}
+</code></pre><br />
+&ndash; DOM2<br />
+<pre><code>element.addEventListenger('click',function(){},false) //如果是true则表示在捕获阶段调用，为false表示在冒泡阶段调用
+
+</code></pre><br />
+&ndash; DOM3<br />
+<pre><code>element.addEventListener('keyup',function(){},false) //增加了鼠标事件 键盘等
+</code></pre></p>
+</li>
+<li>
+<h4 id="dom_4"><a name="user-content-dom_4" href="#dom_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>DOM事件流的三个阶段和过程</h4>
+<ol>
+<li>事件捕获阶段</li>
+<li>处于目标阶段</li>
+<li>事件冒泡阶段</li>
+</ol>
+<p>事件流：从页面中接收事件的顺序。也就是说当一个事件产生时，这个事件的传播过程，就是事件流。</p>
+<p>在W3C模型中，任何事件发生时，先从顶层开始进行事件捕获，直到事件触发到达了事件源元素。然后，再从事件源往上进行事件冒泡，直到到达document</p>
+<p>window-&gt;document-&gt;html-&gt;body</p>
+</li>
+<li>
+<h4 id="_5"><a name="user-content-_5" href="#_5" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>事件代理（事件委托）</h4>
+<p>就是利用事件冒泡的原理</p>
+</li>
+<li>
+<h4 id="event"><a name="user-content-event" href="#event" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Event对象的常见应用</h4>
+<br />
+<pre><code>event.preventDefault();
+event.stopPropagation();
+event.currentTarget;//返回绑定事件的元素
+event.target;//返回触发事件的元素
+</code></pre></li>
+</ul>
+<h2 id="_6"><a name="user-content-_6" href="#_6" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>数组常用的方法</h2>
+<ul>
+<li><code>arr.join(separator)</code> 把数组中的所有元素拼接成字符串</li>
+<li><code>arr.map(callback)</code> 返回处理过的新数组</li>
+<li><code>arr.filter(callback)</code> 返回一个新的通过测试的元素的集合的数组</li>
+<li>
+<p><code>arr.find(callback)</code>返回数组中满足提供的测试函数的第一个元素的值。否则返回 undefined。</p>
+</li>
+<li>
+<p><code>arr.includes(searchEle,formIndex)</code> 判断一个数组是否包含某个值，返回true false.</p>
+</li>
+<li><code>Array.isArray(arr)</code> 判断传递的值是否是数组</li>
+<li><code>arr.push(v); arr.pop();</code> </li>
+<li><code>arr.unshift(v)</code> 将一个或者多个元素添加到数组的开头。返回数组的长度</li>
+<li><code>arr.shift()</code>。从数组开头删除第一个元素.返回这个元素</li>
+<li><code>arr.reverse()</code>数组反转</li>
+<li><code>arr.sort()</code> 数组排序</li>
+<li><code>arr.slice(start,end)</code>返回浅拷贝的新数组。不改变原数组</li>
+<li><code>arr.splice(start,deleCount,item1,item2,...)</code> 删除现有元素或添加新元素。 返回删除元素组成的新数组。改变原数组</li>
+<li><code>arr.indexOf(v)</code> 找元素的索引。没有返回-1.</li>
 </ul></article></body></html>
