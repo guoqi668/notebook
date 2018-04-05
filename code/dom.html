@@ -15,11 +15,12 @@
 
 var button = document.getElementById('clickMe');
 
-button.onclick = function() {
-  console.log('1. You click Button');
-};
+
 document.body.onclick = function() {
   console.log('2. You click body');
+};
+button.onclick = function() {
+  console.log('1. You click Button');
 };
 document.onclick = function() {
   console.log('3. You click document');
