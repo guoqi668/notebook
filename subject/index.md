@@ -67,13 +67,18 @@ display: table-cell; vertical-aligin:middle;
 
 
 
-##DOM事件
+##DOM事件 
 
 - ####DOM事件模型
 
     ##### DOM事件模型分为两类
 
     -- 事件冒泡和事件捕获
+    事件捕获
+        当你使用事件捕获时，父级元素先触发，子级元素后触发，即div先触发，p后触发。
+
+    事件冒泡
+        当你使用事件冒泡时，子级元素先触发，父级元素后触发，即p先触发，div后触发。
     <small>*IE采用的是事件冒泡的形式。*</small>
 
 
@@ -128,6 +133,9 @@ event.currentTarget;//返回绑定事件的元素
 event.target;//返回触发事件的元素
 ```
 
+## BOM 浏览器对象模型
+常用的就是window对象和location。  location.host location.protocol
+navigator中有很多浏览器相关的内容，通常判断浏览器类型都是通过这个对象。 navigator.userAgent
 
 #css
 
@@ -303,33 +311,7 @@ console.log(Count.prototype.__proto__ == Object.prototype)
 * es6扩展运算符 ```var {...obj2} = obj```
 * object.assign
 
-##http
-- 完整的一次Http通信
-* 建立TCP请求
-* 浏览器向服务器发送请求命令
-* 发送请求头信息
-* 服务器应答
-* 服务器发送响应头信息
-* 服务器向浏览器发送数据
-* 服务器关闭TCP连接
 
-TCP协议对应于传输层，而HTTP协议对应于应用层，从本质上来说，二者没有可比性。Http协议是建立在TCP协议基础之上的，当浏览器需要从服务器获取网页数据的时候，会发出一次Http请求。Http会通过TCP建立起一个到服务器的连接通道，当本次请求需要的数据完毕后，Http会立即将TCP连接断开，这个过程是很短的。所以Http连接是一种短连接，是一种无状态的连接。
-- 状态码
-1xx：指示信息--表示请求已接收，继续处理。
-2xx：成功--表示请求已被成功接收、理解、接受。
-3xx：重定向--要完成请求必须进行更进一步的操作。
-4xx：客户端错误--请求有语法错误或请求无法实现。
-5xx：服务器端错误--服务器未能实现合法的请求。
-
-200 OK：客户端请求成功。400 Bad Request：客户端请求有语法错误，不能被服务器所理解。
-401 Unauthorized：请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用。
-403 Forbidden：服务器收到请求，但是拒绝提供服务。
-404 Not Found：请求资源不存在，举个例子：输入了错误的URL。
-500 Internal Server  Error：服务器发生不可预期的错误。
-503 Server Unavailable：服务器当前不能处理客户端的请求，一段时间后可能恢复正常，举个例子：HTTP/1.1 200 OK（CRLF）。
-
-302 302重定向是临时的重定向
-301 301重定向是永久的重定向
 
 ##讲一讲你在日常web开发中加载和交互体验上常用的优化策略
 
@@ -393,27 +375,347 @@ TCP协议对应于传输层，而HTTP协议对应于应用层，从本质上来�
 - ES6标准发布后，module成为标准，标准的使用是以export指令导出接口，以import引入模块，
 - 但是在我们一贯的node模块中，我们采用的是CommonJS规范，使用require引入模块，使用module.exports导出接口。
 
+##ajax步骤
+1.1.创建一个Ajax对象
+    非IE6浏览器:var oAjax=new XMLHttpRequest();
+    IE6浏览器:var oAjax=new ActiveXObject("Microsoft.XMLHTTP");
 
+2.连接到服务器
+    oAjax.open(方法,文件名,异步传输);
+3.发送请求
+    oAjax.send();
+
+4.接收返回值
+请求状态监控:onreadystatechange事件:当自己的Ajax与服务器之间有通讯时触发
+    主要通过readyState属性来判断结束没有,结束了也并没有代表成功,status属性来判断
+
+```
+oAjax.onreadystatechange=function(){
+  　//oAjax.readyState: 表示浏览器和服务器之间进行到哪一步了
+ 　 if(oAjax.readyState==4){  //读取完成
+    　if(oAjax.status==200){  //读取的结果是成功
+      　alert('成功:'+oAjax.responseText);
+   　 }
+  　}
+　}
+```
 
 
 >其他问题
 
 - Promise 有哪些状态 resolve、reject、pending），resolve 和 reject 返回什么？
-- 说说 await 和 async
+Promise 是异步编程的一种解决方案.他是一个对象，可以实现链式的写法来实现同步异步操作
+* 般来说链式的话resolve返回值为一个promise对象// 所谓promise对象, 其实不过是 {then: function() {} }
+- 说说 async 和 await 
+* es7标准引入了 async 函数，使得异步操作变得更加方便。他可以让我们更加优雅的写出代码，而替代then()的写法.它就是 Generator 函数的语法糖。async函数就是将 Generator 函数的星号（*）替换成async，将yield替换成await
+
+- this的问题
+this 永远指向最后调用它的那个对象
+- 怎么改变this的指向？
+* 使用 ES6 的箭头函数 => 箭头函数的 this 始终指向函数定义时的 this，而非执行时
+* 在函数内部使用 _this = this
+*使用 apply、call、bind. 
+调用的函数.call(this的指向，数组）b.call(a,[1,2]) 
+bind 是创建一个新的函数，我们必须要手动去调用  b.bind(a,1,2)() 
+
+
 - export default 是什么意思，做了什么。
 - Git 熟不熟，说说 merge 和 rebase。
 
+##angular
 - AngularJS 的组件生命周期。
-- react思想
-- React 的组件声明周期。
-- Redux 流程图
-- vue双绑原理
 
+##react
+- react思想
+- react需要注意的地方
+    setState（）是异步的。
+    setState 会造成不必要渲染。所以 和渲染无关的状态尽量不要放在 state 中来管理.这个问题通常可以通过  shouldComponentUpdate(nextProps, nextState) return false 来解决
+
+    只有部分周期可以调用setState()方法:componentWillMount componentDidMount componentWillReceiveProps
+
+- React 的组件生命周期。
+
+    * componentWillMount
+        在完成首次渲染之前调用，此时仍可以修改组件的state。一般异步请求放在这里
+    * componentDidMount.
+        真实的DOM被渲染出来后调用
+    * componentWillReceiveProps 组件接收到新的props时调用，并将其作为参数nextProps使用。此时可以更改组件props及state。
+        ```
+        componentWillReceiveProps: function(nextProps) {
+            if (nextProps.bool) {
+                this.setState({
+                    bool: true
+                });
+            }
+        }
+        ```
+    * shouldComponentUpdate
+    组件是否应当渲染新的props或state，返回false表示跳过后续的生命周期方法，可通过该方法进行适当的优化。
+
+    * componentWillUpdate
+        接收到新的props或者state后，进行渲染之前调用，此时不允许更新props或state。
+
+    * componentDidUpdate
+    完成渲染新的props或者state后调用，此时可以访问到新的DOM元素。
+
+    * componentWillUnmount
+    组件被移除之前被调用，可以用于做一些清理工作，在componentDidMount方法中添加的所有任务都需要在该方法中撤销，比如创建的定时器或添加的事件监听器。
+
+    * render
+        必选的方法，创建虚拟DOM，该方法具有特殊的规则：
+
+        只能通过this.props和this.state访问数据
+        可以返回null、false或任何React组件
+        只能出现一个顶级组件（不能返回数组）
+        不能改变组件的状态
+        不能修改DOM的输出
+
+- Redux 流程图
+
+- setState是异步还是同步，如果要一个set完马上set另一个，这种异步链式怎么做
+    异步的；setstate方法中的第二个参数为会回调函数，或者 promise 进行封装。
+- react项目怎么引入sass，less
+    model modle文件夹 index.js  index.less import style from 'index.less'; style对象 classname = {style.class1}
+- redux，常用中间件，比如saga
+    redux-thunk 和 redux-saga 是 redux 应用中最常用的两种异步流处理方式
+    saga是一个中间件，单独redux是不能在action中执行异步请求的，需要借助这个中间件
+- 说说react怎么更新虚拟dom的，用了redux会有性能上的提高吗，为什么
+    当数据变化时，react会将新的虚拟dom和旧的虚拟dom进行对比，找到变化的部分，得出一个diff，然后将diff放到一个队列里，最终批量更新这些diff，并通过render函数将更改后的虚拟dom渲染到真实的dom上。
+- 什么是虚拟dom？react为什么要使用虚拟dom
+    是一个模拟dom树的javascript对象。因为直接操作dom会慢 因为上面挂着很过东西。
+- 单独react.js不能构建复杂项目，一般都是借助redux或者其他中间件
+
+- 什么是dom树？
+
+    一旦浏览器接收到一个HTML文件，渲染引擎就开始解析它，并根据HTML元素（elements）一一对应地生成DOM 节点（nodes），组成一棵DOM树。
+- 父子传值
+    
+
+    子给父传值：子组件传入父组件的方法，在子组件中调用
+
+##Redux
+视图与状态是一一对应的。
+
+- Store
+    * 所有的状态，保存在一个对象里面。Store 就是保存数据的地方，你可以把它看成一个容器。整个应用只能有一个 Store。
+    * createStore这个函数，用来生成 Store。
+
+- State
+    * Store对象包含所有数据,可以通过store.getState()拿到。
+- Action
+    * Action 就是 View 发出的通知，表示 State 应该要发生变化了.也是改变 State 的唯一办法。它会运送数据到 Store。
+    * 那么如何触发action呢？(dispatch) 如何改变state呢？（reducer）
+    * Action 是一个对象。其中的type属性是必须的，表示 Action 的名称。其他属性可以自由设置. 
+- store.dispatch()
+    * 是View发出Action的唯一方法。接受一个 object 发送给 reducer 
+- Reducer
+    * reducer就是纯函数，接收state 和 action，然后返回一个新的 state.
+- combineReducer(reducers)  
+    * 一个项目有很多的reducers,我们要把他们整合到一起. 就用到这个函数
+    * 把一个 object，（object是由多个不同 reducer 函数作为 value 的对象）合并成一个最终的 reducer 函数，然后就可以对这个 reducer 调用 createStore。
+
+
+- Recux-thunk
+redux的中间件.中间件就是一个函数，对store.dispatch方法进行了改造，在发出 Action 和执行 Reducer 这两步之间，添加了其他功能。
+* 为了让action创建函数除了返回action对象外，还可以返回函数.我们需要引用redux-thunk，函数传递两个参数(dispatch,getState).
+
+##React-redux 
+
+- Connect
+    * connect函数作用是从 Redux state 树中读取部分数据，并通过 props 来把这些数据提供给要渲染的组件。也传递dispatch(action)函数到propsvar
+    * connect接收两个参数，一个mapStateToProps,就是把redux的state，转为组件的Props，还有一个参数是mapDispatchToprops, 就是把发射actions的方法，转为Props属性函数。
+- Provider
+    * Provider组件是让所有的组件可以访问到store。不用手动去传。也不用手动去监听。
+
+
+
+
+
+
+##http
+
+- 从输入url到按回车的时候发生了什么？
+    1.dns解析 （寻找哪台机器上有你需要资源）
+    2. 建立TCP连接 
+    3.发送http请求
+    4. 服务器处理这个请求然后返回http报文
+    5. 浏览器解析渲染页面
+    5. 服务器关闭连接
+
+TCP协议对应于传输层，而HTTP协议对应于应用层，从本质上来说，二者没有可比性。Http协议是建立在TCP协议基础之上的，当浏览器需要从服务器获取网页数据的时候，会发出一次Http请求。Http会通过TCP建立起一个到服务器的连接通道，当本次请求需要的数据完毕后，Http会立即将TCP连接断开，这个过程是很短的。所以Http连接是一种短连接，是一种无状态的连接。
+- 状态码
+1xx：指示信息--表示请求已接收，继续处理。
+2xx：成功--表示请求已被成功接收、理解、接受。
+3xx：重定向--要完成请求必须进行更进一步的操作。
+4xx：客户端错误--请求有语法错误或请求无法实现。
+5xx：服务器端错误--服务器未能实现合法的请求。
+
+200 OK：客户端请求成功。400 Bad Request：客户端请求有语法错误，不能被服务器所理解。
+401 Unauthorized：请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用。
+403 Forbidden：服务器收到请求，但是拒绝提供服务。
+404 Not Found：请求资源不存在，举个例子：输入了错误的URL。
+500 Internal Server  Error：服务器发生不可预期的错误。
+503 Server Unavailable：服务器当前不能处理客户端的请求，一段时间后可能恢复正常，举个例子：HTTP/1.1 200 OK（CRLF）。
+
+302 302重定向是临时的重定向
+301 301重定向是永久的重定向
+
+- http协议的主要特点
+ 无连接 （连接之后就会断开，不会保持连接）
+ 无状态 服务端不能记着上一次连接的信息，
+- http 报文的组成
+    请求报文（请求行 请求头 空行 请求体）
+    响应报文 （ 状态行 响应头 空行 响应体 ）
+- http 1.1 支持持久连接
+- get post 
+    get传输长度有限， get会把传输内容暴露在url里面。ge请求参数会被保存在浏览历史记录里面
+- 设置缓存 catch control max mage 
+- requst header里面 的东西
+
+# 原型链
+ - 每个对象都有个__proto属性，指向构造函数的原型对象，这个原型对象也有 __proto__属性，这样一层一层的向上找 知道找到 Object.prototype.__proto__ = null
+ - 通过构造函数可以创建出实例，那每个构造函数都有一个prototype属性这个属性的值是空对象也就是原型对象，可以挂所有实例都需要的属性（声明一个函数就自动增加的）
+    原型对象怎么区分出是被哪个构造函数引用的呢？原型对象上有个constroctor属性指向这个构造函数。 实例有个__proto属性 指向原型对象
+
+ - 创建对象的方法
+    1. 字面量方式
+        var o = {a: 'a'}
+        var o = new Object({a:'a'})
+    2.构造函数创建
+    2.通过Object.create方法
+        var o = {a: 'a'}
+        var o = Object.create(p)
+
+ - 跨域出来
+     jsonp、
+     html5增加了postMessage、
+     cors ( fetch方法 支持跨域通信的ajax 在http头中加个 origin字段)、
+     websocket
+ - 安全
+    csrf 跨站请求伪造。 通过：token验证、
+    xss 跨域攻击
+ - 渲染机制
+    浏览器渲染过程：
+    重排 reflow: 当页面上的改变影响了文档内容、结构或者元素定位时，就会发生重排
+    重绘 repaint:  当在页面上修改了一些不需要改变定位的样式的时候（比如background-color,border-color,visibility)，浏览器只会将新的样式重新绘制给元素
+ -  页面性能提升
+    资源压缩合并 减少http请求
+    异步加载
+    利用浏览器缓存 
+        强缓存  响应头头中有两个字段 expires（过期时间，服务器的时间） cache-control cache-control:max-age=3600. 
+        协商缓存                  Last-Modifies If-Modified-Since(上次缓存的时间)  Etag 
+ - 前后端如何通信 ajax websocket cors 
+ - 高性能css
+    压缩css,把公用的css写在配置文件中，避免多次写。避免css表达式;避免通配选择器
+ - dom渲染优化
+    避免造成重排：批量修改DOM。预先定义好css的class，然后修改DOM的className； 事件委托
+ - 继承
+ - 原型链继承的优点和缺点
+ - 闭包
+ Javascript的变量分为全局变量和局部变量。函数内部可以直接读取全局变量。在函数外部自然无法读取函数内的局部变量。出于种种原因，我们有时候需要得到函数内的局部变量。我们可以在函数的内部，再定义一个函数，然后return出来就可以了。闭包就是能够读取其他函数内部变量的函数。闭包可以理解成“定义在一个函数内部的函数“
+
+ - rem 相对文档跟元素 htmlfont-size
+ - 浏览器常见兼容问题
+    css
+    1.不同浏览器的默认样式存在差异。可以定制属于自己业务的 reset.css
+    2.ie9 以下浏览器对 html5 新增标签不识别的问题 html5shiv.js
+    3.ie9 以下浏览器不支持 CSS3 Media Query 的问题 respond.js
+    4. 浏览器 CSS 兼容前缀 -o // Opera；-ms// IE；-moz// Firefox；-webkit// Chrome
+    js
+        阻止冒泡的方式:e.stopPropgation()  e.cancelBubble=true ;
+        阻止默认事件 e.preventDefault()  e.returnValue='false';
+ - 活动页缓存 
+
+- 房地产网站 包含全球国家房源 看房型展示 新闻 资讯 登录注册 技术站老 因为 对第一版升级重构 用jquery 写的 es6优化。  
+kss-node。把静态的放 cdn上 。 资源从cdn上请求快： 2.向服务器发的字段比较少 （cookie是服务器产生的，没发过去，请求报文少了很多东西）， 服务器上传慢 下来的快。我 wepack 1 wepack 3 升级到 webpak1 3 。做到后面的时候空闲 e2e， 项目规范，任务分配，大家员工沟通，github 钩子 jira，slack 触发不署命令，travis 代码上的检查 ，
+2. cdn是就近的。
+
+
+##es6
+- 变量的解构赋值
+    * 完全解构 不完全解构 解构不成功（变量为undefined）
+    * 解构赋值允许指定默认值，当一个数组成员严格等于undefined，默认值才生效
+用途：
+1.变量交换。
+2.从函数返回多个值。 函数只能返回一个值，如果要返回多个值，只能将它们放在数组或对象里返回。有了解构赋值，取出这些值就非常方便。
+3.解构赋值对提取 JSON 对象中的数据，尤其有用
+
+- 块级作用域 let const
+- 动态字符串
+- 使用扩展运算符（...）拷贝数组
+- 箭头函数
+- class  A 相当于构造函数 里面的方法相当于 绑定在原型对象上的公用方法，constructor里面放着属于自己的东西
+- promise
+- async await
+- Object.assgin 
+    * 将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。
+    * 只能深拷贝第一层, 深层的还是浅拷贝
+
+
+##vue与react对比
+相同：都使用了虚拟dom； 都鼓励组件化应用；React和Vue都有很好的Chrome扩展工具去帮助你找出bug；
+    配套框架 vue-router和vuex，而React react-router和react-redux
+不同：React与Vue最大的不同是模板的编写。
+    Vue鼓励你去写近似常规HTML的模板；React推荐你所有的模板通用JSX书写。JSX只是JavaScript混合着XML语法，
+link:http://caibaojian.com/vue-vs-react.html
+
+##Vue
+
+    
+- vue的优点
+    * 比较轻量而且官方文档很清晰
+    * 
+- mvvm和 mvc
+
+- vue双绑原理
+    基于Object.defineProperty()方法来对数据的读写进行处理.
+    * 父向子传值
+        子组件在props中创建一个属性，用以接收父组件传过来的值
+        父组件中注册子组件
+        在子组件标签中添加子组件props中创建的属性
+        把需要传给子组件的值赋给该属性
+    * 子向父传值
+        子组件用 $emit 发射自定义事件,并携带要传递给父组件的值。
+        在父组件中的子标签中监听该自定义事件并添加一个响应该事件的处理方法
+- vue生命周期
+    * beforeCreate
+        数据还没有监听,也没有挂载DOM对象
+    * created
+        数据已经绑定到了对象实例，但是还没有挂载对象
+    * beforeMount
+        此时是给vue实例对象添加$el成员 （$el属性是一个HTMLElement对象），并且挂载DOM元素。
+    * mounted
+    在mounted之前元素中还是通过{{message}}进行占位的，还是JavaScript中的虚拟DOM形式存在的。在mounted之后可以看到h1中的内容发生了变化。
+    * beforeUpdate
+    * updated
+        当vue发现data中的数据发生了改变，会触发对应组件的重新渲染，在beforeUpdate可以监听到data的变化但是view层没有被重新渲染。等到updated的时候 view层才被重新渲染，数据更新先后调用beforeUpdate和updated钩子函数
+    * beforeDestroy
+    * destroyed
+        beforeDestroy钩子函数在实例销毁之前调用。在这一步，实例仍然完全可用。
+        destroyed钩子函数在Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。
+
+- Computed 计算属性。它是基于他们的依赖进行缓存的，只有相关依赖发生改变时才会重新求值。
+    Computed VS methods  只要发生重新渲染，method 调用总会执行函数。
 - 说说执行上下文
 - 闭包
+
+
+    应用场景:setTimeOUt
 - 浏览器缓存原理和相关http头
 
 -AMD和CMD是什么？它们的区别有哪些？
 - 多行省略号显示
+
+## postcss
+ - PostCSS 是目前流行的一个对 CSS 进行处理的工具。它提供了一种方式用 JavaScript 代码来处理 CSS。PostCSS 的主要功能是把 CSS 解析成 JavaScript 可以操作的 抽象语法树结构（代码语法结构的树状表示） AST，然后调用插件来处理 AST 来得到结果。
+ - PostCSS 一般不单独使用，而是与已有的构建工具进行集成。Webpack 中使用 postcss-loader 来执行插件处理.有个post.config.js配置文件，可以配置需要的插件。
+ - 常用插件 Autoprefixer
+  作用是为 CSS 中的属性添加浏览器特定的前缀。还可以配置需要支持的浏览器。如“last 2 versions”表示主流浏览器的最近两个版本
+- postcss-assets 图像处理插件
+    * 通过给定的文件名，知道到合法的路径来替换 resolve(image);
+    * 在 CSS 声明中，可以使用 width、height 和 size 方法来获取到图片的宽度、高度和尺寸
+    * 可以使用 inline 方法把图片转换成 Base64 编码的 data url 的格式，这样可以减少对图片的 HTTP 请求。
+- css-mqpacker 媒体查询插件
+
 
 
