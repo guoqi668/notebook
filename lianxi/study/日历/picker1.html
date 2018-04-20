@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        li{list-style: none;}
+        #picker{width: 523px;height: 550px;padding: 20px;background-color: #f5f5f5;}
+        #picker .pre,#picker .last{color: #28a4b0;font-size: 16px;line-height: 16px; width: 20px;height: 20px;display:inline-block;border: 1px solid #28a4b0;border-radius: 50%;text-align: center;}
+        .picker_com ul{width: 100%;}
+        .picker_com ul:after{display: table;clear: both;content: "";}
+        .picker_com li{margin: -1px 0 0 -1px;float: left;width: 70px;background-color: white; border: 1px solid #28a4b0;z-index: 5;}
+        .date_list li{position: relative; height: 70px;cursor: pointer;}
+        .picker_top{padding: 15px 0;text-align: center}
+        .picker_top .pre{float: left;}
+        .picker_top .last{float: right;}
+        .week_list li{padding: 5px 0;}
+        .date_list .price{font-size: 14px;text-align: center;margin-top: 25px;}
+        .date_list li.disable{cursor: no-drop;background-color: #ddd}
+    </style>
+</head>
+<body>
+<div id="picker">
+    <div class="picker_top">
+        <span class="pre">&lt</span>
+        <span class="oYear">年</span>
+        <span class="oMonth">月</span>
+        <span class="last">&gt</span>
+    </div>
+    <div class="week_list picker_com">
+        <ul>
+            <li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li><li>日</li>
+        </ul>
+    </div>
+    <div class="date_list picker_com">
+        <ul>
+
+        </ul>
+
+    </div>
+
+</div>
+
+
+<script src="../../node_modules/jquery/dist/jquery.js"></script>
+<script>
+    /**
+     * Created by Administrator on 2016/12/30.
+     */
+    var date=new Date();
+    console.log(date)
+    var start,end,grid_arr=[],sp,drag_flag= 0,pre_Date;
+    showDate(date);
+
+    function showDate (date) {
+
+        date.setDate(1); //设置为当前月的第一天
+        var firstWeek = date.getDay(); //这个月的第一天是周几
+        firstWeek=firstWeek==0?7:firstWeek;
+        date.setMonth(date.getMonth()+1); //设置为下个月
+        date.setDate(0);//判断这个月的最后一天，然后添加数字日历
+        var lastWeek=date.getDay();  //判断最后一天是不是周日
+        lastWeek=lastWeek==0?7:lastWeek;  //判断最后一天是星期几
+        var maxDate=date.getDate();
+        var html='';
+        date.setDate(0); //设置为上个月的最后一天
+        pre_Date=date.getDate();
+        console.log(pre_Date)
+        console.log(date)
+        date.setDate(32);//若有上个月有31天 则设置为下个月的第一天
+        console.log(date)
+
+        if(firstWeek>1&&firstWeek<=7)
+        {
+            for(var i=pre_Date-firstWeek+2;i<=pre_Date;i++)
+            {
+                html+="<li class='disable'>"+i+"</li>"
+            }
+        }
+        for(var j=1;j<=maxDate;j++)
+        {
+            (function(j){
+                html+="<li id="+j+">" +
+                        "<span>"+j+"</span>"+"" +
+                        "<p class='price' contenteditable='true'>"+"123"+"</p>"+
+                        "</li>";
+            })(j)
+        }
+        if(lastWeek<7)
+        {
+            for(var z=1;z<=7-lastWeek;z++){
+                html+="<li class='disable'>"+z+"</li>"
+            }
+        }
+//        for(var k=lastWeek;k<7;k++)
+//        {
+//            html+="<li></li>"
+//        }
+        $(".date_list ul").html(html);
+        $('.oYear').html(date.getFullYear()+"年");
+        //alert(date.getFullYear())
+        $('.oMonth').html(date.getMonth()+1+'月');
+
+        $(".date_list li").mousedown(function(e){
+            start=parseInt($(this).prop("id"));
+            drag_flag=1;
+            if($(this).hasClass("disable"))
+            {
+                $(this).css("backgroundColor",'#ddd')
+            }
+            else{
+                $(this).css({"backgroundColor":'rgba(40,164,176,0.3)',"box-shadow":'1px 1px 1px 1px rgba(40,164,176,0.5)'});
+                $(this).siblings("li:not([class='disable'])").css({"backgroundColor":'white',"box-shadow":'none'});
+
+            }
+            return false;
+        });
+        $(".date_list li").mouseenter(function(){
+            if(1==drag_flag)
+            {
+                grid_arr.push($(this).prop("id"));
+                end=parseInt(grid_arr[grid_arr.length-1]);
+                sp="#";
+                $(this).siblings("li:not([class='disable'])").css({"backgroundColor":'white',"box-shadow":'none'});
+                if(end>start)
+                {
+                    for(var j=start;j<=end;j++)
+                    {
+                        $("#"+j+"").css({"backgroundColor":'rgba(40,164,176,0.3)',"box-shadow":'1px 1px 1px 1px rgba(40,164,176,0.5)'});
+                    }
+                }else{
+                    for(var k=end;k<=start;k++)
+                    {
+                        $("#"+k+"").css({"backgroundColor":'rgba(40,164,176,0.3)',"box-shadow":'1px 1px 1px 1px rgba(40,164,176,0.5)'});
+                        if(k==9)
+                        {
+                            $("#"+k+"").find("span").text()
+                        }
+                    }
+                }
+            }else{
+                return;
+            }
+            return false;
+        });
+        $(".date_list li").mouseup(function(){
+            drag_flag=0;
+
+        });
+    }
+    $(".pre").click(function(){
+        date.setDate(0);
+        showDate(date);
+    });
+    $(".last").click(function(){
+        date.setMonth(date.getMonth()+1);
+        showDate(date);
+    });
+
+    $("#picker .date_list").on("click","li",function() {
+        $(this).find(".price").focus();
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

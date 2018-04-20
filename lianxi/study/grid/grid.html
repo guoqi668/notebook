@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>grid</title>
+	<style>
+		.grid-1 {
+			/*声明容器是个网格容器*/
+			display: grid;
+			/*定义网格样式风格*/
+			/*设置五列的 宽度 和 高度*/
+			grid-template-columns: 180px 20px 150px 20px 150px; 
+			grid-template-rows: auto 20px auto 60px auto;
+		}
+		.item-1 {
+			background: #b03523;
+			grid-column: 1;
+			grid-row: 1;
+		}
+		.item-2 {
+			background: #33a85a;
+			grid-column: 3;
+			grid-row: 1;
+		}
+		.item-3 {
+			background: #6a478f;
+			grid-column: 5;
+			grid-row: 1;
+		}
+
+
+		.item-4 {
+			background: #da6f2b;
+			grid-column: 1;
+			grid-row: 3;
+		}
+		.item-5 {
+			background: #ac6b5c;
+			grid-column: 3;
+			grid-row: 3;
+		}
+
+		.item-6 {
+			background: #2a3c5b;
+			grid-column: 5;
+			grid-row: 5;
+		}
+
+
+		ul {
+			margin:0;
+			padding: 0;
+			list-style: none;
+		}
+		li:before {
+			content: '\00b7';
+		}
+	</style>
+</head>
+<body>
+	<section class="grid-1">
+		<div class="item-1">1</div>
+		<div class="item-2">2</div>
+		<div class="item-3">3</div>
+		<div class="item-4">4</div>
+		<div class="item-5">5</div>
+		<div class="item-6">6</div>
+	</section>
+	<ul>
+		<li>
+			<a href="#">*</a>
+			<a href="#">*</a>
+			<a href="#">*</a>
+		</li>
+	</ul>
+</body>
+</html>

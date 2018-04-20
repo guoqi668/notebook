@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	div {
+		height: 2000px;
+		background: #ccc;
+	}
+	p {
+		position: fixed;
+		bottom: 100px;
+		right: 0;
+		width: 80px;
+		height: 80px;
+		background: yellow;
+		border-radius: 50%;
+		display: none;
+	}
+
+</style>
+<body>
+	<div>
+		
+	</div>
+	<p></p>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+	<script>
+		(function(){
+			var $window = $(window);
+			$window.scroll(function(){
+				if($window.scrollTop()>0){
+					$('p').show(500);
+				}else {
+					$('p').hide(500);
+				}
+			})
+
+			$('p').on('click',function(){
+				$('html,body').animate({scrollTop: 0});
+			})
+		})();
+	</script>
+</body>
+</html>

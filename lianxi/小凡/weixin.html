@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微信朋友圈</title>
+    <link rel="stylesheet" href="yijia.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+</head>
+<body>
+<div id="weiXinFriend">
+    <!--头部图片-->
+    <div class="nav">
+        <img src="../img/banner.jpg" alt="">
+        <div class="navSmall">
+            <img src="../img/banner.jpg" alt="">
+        </div>
+    </div>
+    <!--内容部分-->
+    <div class="item">
+    <div class="left">
+        <div class="picture">
+            <img src="../img/farm/recmdImg1.png" alt="">
+        </div>
+    </div>
+    <div class="right">
+        <p class="name">王丽君</p>
+        <div class="content">
+            十年啦革命友谊   十年啦革命友谊 十年啦革命友谊 十年啦革命友谊 十年啦革命友谊 十年啦革命友谊 十年啦革命友谊
+            十年啦革命友谊 十年啦革命友谊 十年啦革命友谊 十年啦革命友谊 十年啦革命友谊 十年啦革命友谊
+        </div>
+        <div class="images">
+            <ul>
+                <li><img src="../img/farm/recmdImg1.png" alt=""></li>
+            </ul>
+        </div>
+        <div class="bottom">
+            <span>2</span>天前
+            <div  class="praiseACommentBox">
+                <ul  class="praiseAComment active">
+                    <li>
+                        <img src="../img/icn01.png" alt="">
+                        <span class="zan">赞</span>
+                    </li>
+                    <li>
+                        <img src="../img/icn01.png" alt="">
+                        <span class="commentOne">评论</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div  class="commentImg">
+
+            </div>
+        </div>
+        <div class="comment">
+            <div class="praise">
+                <img src="../img/icn02.png" alt="">
+                我在这儿
+            </div>
+            <ul  class="commentContent">
+                <li>
+                    <span >张掖</span>：<span>你在现场</span>
+                </li>
+                <li>
+                    <span >张掖</span>：<span>你在现场</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</div>
+<script src="../js/lib/jquery-1.7.1.min.js"></script>
+<script>
+//    点击评论的效果
+        var commentImg = $('.commentImg');
+        commentImg.on('click',function(){
+            $(this).siblings().find('.praiseAComment').toggleClass('active');
+        });
+//    点击赞的效果
+        $('.zan').on('click',function(){
+            $(this).text('取消');
+            $(this).parent().parent().find('.praiseAComment').removeClass('active');
+        });
+//    点击评论的效果
+        $('.commentOne').on('click',function(){
+            alert('a');
+            $(this).siblings().find('.praiseAComment').toggleClass('active');
+
+        });
+</script>
+</body>
+</html>

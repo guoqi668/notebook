@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style type="text/css">
+		canvas { border: 1px solid black;position: absolute;left: 0;right: 0;top: 0;bottom: 0;margin: auto;}
+	</style>
+</head>
+<body>
+	<canvas id="oCanvas" width="500" height="500"></canvas>
+	<script type="text/javascript">
+		var oCanvas = document.getElementsByTagName("canvas")[0];
+		var mycanvas= oCanvas.getContext("2d");
+		
+		drawAxis();
+		moveSqu(100,50,230,350);
+		
+		function drawAxis(){
+			mycanvas.beginPath();
+			mycanvas.moveTo(50,50);
+			mycanvas.lineTo(50,450);
+			mycanvas.lineTo(450,450);
+			mycanvas.lineWidth = "3px";
+			mycanvas.stroke();
+			mycanvas.closePath();
+			
+			mycanvas.beginPath();
+			mycanvas.moveTo(50,35);
+			mycanvas.lineTo(45,50);
+			mycanvas.lineTo(55,50);
+			mycanvas.closePath();
+			mycanvas.stroke();
+			
+			mycanvas.beginPath();
+			mycanvas.moveTo(450,445);
+			mycanvas.lineTo(450,455);
+			mycanvas.lineTo(465,450);
+			mycanvas.closePath();
+			mycanvas.stroke();
+			
+			for(var i=0;i<4;i++){
+				//刻度线
+				mycanvas.beginPath();
+				mycanvas.moveTo(50,450-(i+1)*100);
+				mycanvas.lineTo(60,450-(i+1)*100);
+				mycanvas.closePath();
+				mycanvas.stroke();
+				//数值
+				mycanvas.beginPath();
+				mycanvas.font = "12px 微软雅黑";
+				mycanvas.fillText((i+1)*100,60,450+4-(i+1)*100)
+			}
+			
+			
+			
+		}
+		
+		function drawSqu(x,h){
+			mycanvas.beginPath(x,h);
+			mycanvas.fillStyle = "darksalmon"
+			mycanvas.fillRect(x,450-h,50,h);
+			mycanvas.closePath();
+		}
+		
+		function moveSqu(per1,per2,per3,per4){
+			var squHei1 = per1;
+			var squHei2 = per2;
+			var squHei3 = per3;
+			var squHei4 = per4;
+			var step = 0;
+			var stepNum = 100;
+			var perHei1 = per1/stepNum;
+			var perHei2 = per2/stepNum;
+			var perHei3 = per3/stepNum;
+			var perHei4 = per4/stepNum;
+			var initPer1 = 0;
+			var initPer2 = 0;
+			var initPer3 = 0;
+			var initPer4 = 0;
+			var timer = setInterval(function(){
+				var arr = [];
+				step++;
+				initPer1 += perHei1;
+				initPer2 += perHei2;
+				initPer3 += perHei3;
+				initPer4 += perHei4;
+				arr.push(initPer1);
+				arr.push(initPer2);
+				arr.push(initPer3);
+				arr.push(initPer4);
+				if(step == stepNum){
+					clearInterval(timer);
+					initPer1 = squHei1;
+					initPer2 = squHei2;
+					initPer3 = squHei3;
+					initPer4 = squHei4;
+					
+				}
+				for(var i = 0;i < 4; i++){
+					drawSqu(100+i*80,arr[i]);
+				}
+			},1000/60)
+			
+		}
+		
+		
+		
+		
+		
+	</script>
+</body>
+</html>

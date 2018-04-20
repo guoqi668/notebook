@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+try {
+  var qr = require('../lib/index')
+} catch (e) {
+  qr = require('qrcode')
+}
+
+var text = process.argv[2]
+var file = process.argv[3]
+
+if (text && text.length) {
+  if (file && file.length) {
+    qr.toFile(file, text, function (err, data) {
+      if (!err) {
+        process.stdout.write('saved chajian to: ' + file + '\n')
+      } else {
+        process.stderr.write('failed to save chajian\n')
+        throw err
+      }
+    })
+  } else {
+    qr.toString(text, { type: 'terminal' }, function (error, text) {
+      if (error) {
+        throw new Error(error)
+      }
+
+      process.stdout.write(text)
+      process.stdout.write('\n')
+    })
+  }
+} else {
+  process.stderr.write('text\n\trequired as first argument.\nfile name [optional]\n\tto save png or svg chajian may be provided as optional second argument\n')
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <button>点击</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+<script>
+    var ob = {
+        age: "person",
+        test: function () {
+            console.log(this.age);
+        }
+    }
+    $('button').on('click',ob.test); // 输出undefined;
+
+    // 一下两者等价
+    $('button').on('click',$.proxy(ob.test,ob));
+    $('button').on('click',$.proxy(ob,'test')); // 强制执行 ob 内的 "test" 函数的上下文
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+/*$form_checkbox_radio_border_color: #47A8C0 !default;
+$form_checkbox_radio_color: #0c4757 !default;*/
+
+
+
+ .checkbox_grp,
+ .radio_grp {position: relative;}
+ .checkbox_grp,
+ .radio_grp {padding-left: 25px;line-height: 25px;color: #28a4b0;cursor: pointer;font-size: 12px;height: 20px; display: inline-block}
+
+
+
+ .checkbox_grp input,
+ .radio_grp input {position: absolute;left: -9999px;  }
+
+ .checkbox_grp i,
+ .radio_grp i {position: absolute;top: 3px;left: 0;display: block;width: 15px;height: 15px;outline: 0;border:1px solid #28a4b0;  /*background: #9cd9e8; */ }
+
+.radio_grp i {border-radius: 50%;  }
+ .checkbox_grp input+i:after,
+ .radio_grp input+i:after
+{position: absolute;opacity: 0;transition: opacity .1s;-webkit-transition: opacity .1s; }
+
+
+
+ .radio_grp input+i:after {background-color: #28a4b0;content: '';top: 3px;left: 3px;width: 9px;height: 9px;border-radius: 50%;}
+ .checkbox_grp input:checked+i:after,
+ .radio_grp input:checked+i:after {
+  opacity: 1;
+}
+ .checkbox_grp input+i:after {content: '\f00c';font: 400 15px/16px FontAwesome;text-align: center; }
+	</style>
+</head>
+<body>
+
+
+  <label class="radio_grp">
+	<input type="radio" name="radio" checked="checked">
+	<i></i>Alexandra
+  </label>
+  <label class="radio_grp">
+	<input type="radio" name="radio">
+	<i></i><span>sdadg</span></label>
+  <label class="radio_grp">
+	<input type="radio" name="radio">
+	<i></i><span>sdadg</span>
+  </label>
+
+  <label class="checkbox_grp">
+	<input type="checkbox" name="checkbox" checked="checked">
+	<i></i>Alexandra</label>
+  <label class="checkbox_grp">
+	<input type="checkbox" name="checkbox">
+	<i></i>Alice</label>
+  <label class="checkbox_grp">
+	<input type="checkbox" name="checkbox">
+	<i></i>Anastasia</label>
+
+
+  <label class="checkbox_grp">
+	<input type="checkbox" name="checkbox">
+	<i></i>Avelina</label>
+  <label class="checkbox_grp">
+	<input type="checkbox" name="checkbox">
+	<i></i>Basilia</label>
+  <label class="checkbox_grp">
+	<input type="checkbox" name="checkbox">
+	<i></i>Beatrice</label>
+
+
+
+  </form>
+<script>
+	
+</script>
+</body>
+</html>

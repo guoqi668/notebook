@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>列表</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <a href="/add" class="btn btn-success">添加</a>|<a href="" class="btn btn-info">列表</a>
+    <hr>
+    <h4>列表</h4>
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>名字</th>
+            <th>密码</th>
+            <th>操作</th>
+        </tr>
+        <% for(var i=0;i<user.length;i++){ %>
+            <tr>
+                <td><%=user[i].id%></td>
+                <td class="username"><%=user[i].name%></td>
+                <td><%=user[i].password%></td>
+                <td><a href="/delete/<%=user[i].id%>" class="btn btn-info">删除</a></td>
+
+            </tr>
+        <%}%>
+    </table>
+</body>
+<script type="text/javascript">
+    var bool = false;
+    //绑定双击事件
+    $(".username").dblclick(function(){
+        if(bool==true) {
+            return ;
+        }
+        //获取名字
+        v=$(this).html();
+        // alert(v);
+        //创建input
+        var input=$('<input type="text" class="form-control">');
+        //赋值
+        input.val(v);
+        //清除
+        $(this).empty();// innerHTML==null
+        // js=> document.createElement('img');
+        //内部插入
+        $(this).append(input);
+        bool = true;
+        var td=$(this);
+        //给input 绑定失去焦点事件
+        input.blur(function(){
+            //获取id和修改过的值
+            newV=$(this).val();
+            id=$(this).parents("tr").find("td:first").html();
+
+            // alert(newV+":"+id);
+            //执行Ajax
+            $.get("/update",{newV:newV,id:id},function(data){
+                // alert(data.msg);
+                if(data.status==1){
+                    //重新给当前用户所在的td 赋值
+                    td.html(newV);
+                    alert("数据修改成功");
+                }else{
+                    alert("数据修改失败");
+                }
+                bool=false;
+            },"json");
+
+        });
+    });
+</script>
+</html>

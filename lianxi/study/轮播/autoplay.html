@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* CSS Document */
+        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,a,div,img{
+            padding: 0; margin: 0;
+        }
+        table{
+            border-collapse:separate;
+            border-spacing:0;
+        }
+        img {
+            border: 0;
+            margin:0;
+        }
+        ul,li{
+            list-style: none;
+        }
+
+        h1,h2,h3,h4,h5,h6{
+            font-weight: normal;
+            font-size: 100%;
+        }
+        a{
+            color:#514339;
+            text-decoration:none;
+        }
+        a:hover{
+            color:#c10000;
+            text-decoration:underline;
+        }
+        body{
+            padding-top:60px;
+            font-size: 13px;
+            color: #514339;
+        }
+        /*轮播部分*/
+        .wrapper{
+            width: 1000px;
+            height:400px;
+            margin:0 auto;
+            position:relative;
+        }
+        .banner{
+            width:1000px;
+            height:auto;
+            position:absolute;
+            left:0;
+            top:0;
+
+        }
+        .banner li a img{
+            width:1000px;
+            height:400px;
+            display: block;
+            position:absolute;
+            top:0;
+            left:0;
+        }
+        .dotSpan{
+            width:1000px;
+            height:35px;
+            position:absolute;
+            left:0;
+            bottom:0;
+            zoom:1;
+        }
+        .dotSpan p {
+            width:120px;
+            height:35px;
+            margin:0 auto;
+        }
+        .dotSpan span{
+            width:15px;
+            height:15px;
+            display:block;
+            float:left;
+            margin-left:10px;
+            background:url("img/dot.png") no-repeat left bottom;
+        }
+        .dotSpan .spanOne{
+            background:url("img/dot.png") no-repeat left top;
+        }
+
+        .iconLeft{
+            width:60px;
+            height:90px;
+            cursor:pointer;
+            background:#000 url('img/ad_ctr.png') no-repeat 5px -180px ;
+            opacity: 0.5;
+            filter:alpha(opacity:0.5);
+            position:absolute;
+            left:0;
+            top:155px;
+            display: none;
+
+        }
+        .iconLeft1{
+            background:#000 url('img/ad_ctr.png') no-repeat 3px top;
+        }
+        .iconRight{
+            width:60px;
+            height:90px;
+            cursor:pointer;
+            background:#000 url('img/ad_ctr.png') no-repeat -5px bottom;
+            opacity:0.5;
+            filter:alpha(opacity:0.5);
+            position:absolute;
+            top:155px;
+            right:0;
+            display:none;
+        }
+        .iconRight1{
+            background:#000 url('img/ad_ctr.png') no-repeat -3px -90px;
+        }
+    </style>
+</head>
+<body>
+<!--最外层部分-->
+<div class="wrapper">
+    <div class="banner">
+        <ul class="imgList">
+            <li><a href="#"><img src="img/ad_auto.jpg" alt=""></a></li>
+            <li><a href="#"><img src="img/ad_stock.jpg" alt=""></a></li>
+            <li><a href="#"><img src="img/ad_nba.jpg" alt=""></a></li>
+            <li><a href="#"><img src="img/ad_yuetu.jpg" alt=""></a></li>
+        </ul>
+    </div>
+    <p class="iconLeft"></p>
+    <p class="iconRight"></p>
+    <div class="dotSpan">
+        <p>
+            <span class="spanOne"></span>
+            <span></span><span></span><span></span>
+        </p>
+    </div>
+</div>
+<script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var num=$('.dotSpan span').length;
+        var timer_banner=null;
+        $('.imgList li:gt(0)').hide();//隐藏所有的li 除了第一个
+        var i_mun=0;
+
+        //点击小图标切换
+        $('.dotSpan span').click(function () {
+            $(this).addClass('spanOne').siblings('span').removeClass('spanOne');
+            var i_mun1=$('.dotSpan span').index(this);
+            $('.imgList li').eq(i_mun1).fadeIn('slow').siblings('li').fadeOut('slow');
+            i_mun=i_mun1;// 记住现在是第几个li;
+
+        })
+
+        //左边箭头点击切换
+        $('.iconLeft').click(function(){
+            if(i_mun==0)
+            {
+                i_mun=num;
+            }
+            //大图切换
+            $('.imgList li').eq(i_mun-1).fadeIn('slow').siblings('li').fadeOut('slow');
+            //小圆点切换
+            $('.dotSpan span').eq(i_mun-1).addClass('spanOne').siblings('span').removeClass('spanOne');
+            i_mun--;
+        })
+
+        //右边箭头点击切换
+        $('.iconRight').click(function(){
+            auto_play();
+        })
+        //鼠标移入 移出 箭头颜色改变
+        function mouse(ele,newclass){
+            $(ele).mouseover(function(){
+                $(this).addClass(newclass);
+            })
+            $(ele).mouseout(function () {
+                $(this).removeClass(newclass)
+            })
+        }
+        mouse('.iconRight','iconRight1');
+        mouse('.iconLeft','iconLeft1');
+
+        //自动播放
+        function bannerMove(){
+            timer_banner=setInterval(function(){
+                auto_play();
+            },2000)
+        }
+        bannerMove();
+        //鼠标移入停止自动播放 移出自动播放;并且让左右按钮显示 隐藏
+        $('.wrapper').mouseover(function(){
+            clearInterval(timer_banner);
+            $('.iconLeft,.iconRight').css('display','block');
+        })
+        $('.wrapper').mouseout(function(){
+            bannerMove();
+            $('.iconLeft,.iconRight').css('display','none');
+        })
+        function auto_play(){
+            if(i_mun==num-1)
+            {
+                i_mun=-1;
+            }
+            $('.imgList li').eq(i_mun+1).fadeIn('slow').siblings('li').fadeOut('slow');
+            $('.dotSpan span').eq(i_mun+1).addClass('spanOne').siblings('span').removeClass('spanOne');
+            i_mun++;
+        }
+
+    })
+</script>
+</body>
+</html>

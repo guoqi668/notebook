@@ -1,0 +1,359 @@
+/*公共样式*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body，html {
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  font-family: arial;
+  background: #e8e8e8;
+}
+input {
+  background: none;
+  border: none;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+img {
+  border: none;
+  vertical-align: top;
+}
+/*fqq.html */
+#interestBox {
+  width: 100%;
+  height: 100%;
+}
+#interestBox header {
+  z-index: 1;
+  position: fixed;
+  width: 100%;
+  height: 44px;
+  background: lightskyblue;
+}
+#interestBox header .first,
+#interestBox header .last {
+  font-size: 1.5rem;
+}
+#interestBox header .last {
+  text-align: right;
+}
+#interestBox header .middle {
+  font-size: 1.7rem;
+  text-align: center;
+}
+#interestBox .fourNav {
+  z-index: 1;
+  top: 44px;
+  left: 0;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  height: 44px;
+  background: #fefefe;
+  line-height: 44px;
+  font-size: 1.5rem;
+  border-bottom: 1px solid lightgrey;
+}
+#interestBox .fourNav li {
+  display: inline-block;
+  width: 25%;
+  height: 100%;
+  margin: -2px;
+}
+#interestBox .fourNav li.active {
+  border-bottom: 2px solid #4fd7fa;
+}
+#interestBox section {
+  margin-top: 8rem;
+  width: 100%;
+  position: absolute;
+}
+#interestBox section .box {
+  display: none;
+}
+#interestBox section .box.active {
+  display: block;
+}
+#interestBox section .relishBox {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+#interestBox section .relishBox .itemBox {
+  margin: 0 0 20px 0;
+  width: 100%;
+}
+#interestBox section .relishBox .itemBox .item {
+  overflow: hidden;
+}
+#interestBox section .relishBox .itemBox .second {
+  width: 100%;
+  height: auto;
+}
+#interestBox section .relishBox .itemBox .third {
+  width: 100%;
+}
+#interestBox section .relishBox .itemBox .third .right {
+  display: inline-block;
+}
+#interestBox section .recentlyBox {
+  width: 100%;
+}
+#interestBox section .recentlyBox .nav {
+  width: 100%;
+  height: 6rem;
+}
+#interestBox section .recentlyBox .nav .left {
+  height: 100%;
+  padding: 0.6rem 0.3rem;
+}
+#interestBox section .recentlyBox .nav .left img {
+  width: 100%;
+  height: 100%;
+}
+#interestBox section .recentlyBox .nav .middle {
+  height: 100%;
+  padding: 0 1rem;
+}
+#interestBox section .recentlyBox .nav .middle .name {
+  font-size: 1.8rem;
+}
+#interestBox section .recentlyBox .interSpace {
+  width: 100%;
+  height: 1rem;
+  background: #eeeeee;
+}
+#interestBox section .recentlyBox .sectionItem {
+  width: 100%;
+}
+#interestBox section .recentlyBox .sectionItem .begin {
+  width: 100%;
+  height: 4rem;
+  line-height: 4rem;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid lightgrey;
+}
+#interestBox section .recentlyBox .sectionItem .item {
+  width: 100%;
+  height: 5rem;
+}
+#interestBox section .recentlyBox .sectionItem .item .left {
+  padding: 0.5rem 1rem;
+  height: 100%;
+}
+#interestBox section .recentlyBox .sectionItem .item .left img {
+  width: 100%;
+  height: 100%;
+}
+#interestBox section .recentlyBox .sectionItem .item .middle {
+  height: 100%;
+  padding: 0.5rem;
+  border-bottom: 1px solid lightgrey;
+}
+#interestBox section .recentlyBox .sectionItem .item .middle .name {
+  font-size: 1.8rem;
+}
+#interestBox section .recentlyBox .sectionItem .item .right {
+  line-height: 5rem;
+  height: 100%;
+  border-bottom: 1px solid lightgrey;
+}
+#interestBox section .recentlyBox .sectionItem .item:nth-last-of-type(1) .middle,
+#interestBox section .recentlyBox .sectionItem .item:nth-last-of-type(1) .right {
+  border-bottom: none;
+}
+#interestBox section .recentlyBox .recommend {
+  width: 100%;
+  padding: 0 0.5rem;
+}
+#interestBox section .recentlyBox .recommend .nav {
+  width: 100%;
+  height: 3rem;
+  line-height: 3rem;
+}
+#interestBox section .recentlyBox .recommend .item {
+  z-index: 1;
+  height: 10rem;
+  overflow: auto;
+}
+#interestBox section .recentlyBox .recommend .item li {
+  display: inline-block;
+  height: 10rem;
+  width: 9rem;
+  border: 1px solid lightgrey;
+}
+/*weixin.html*/
+#weiXinFriend {
+  width: 100%;
+  height: 100%;
+  clear: both;
+  content: '';
+}
+#weiXinFriend .nav {
+  width: 100%;
+  height: 50%;
+  position: relative;
+}
+#weiXinFriend .nav img {
+  width: 100%;
+  height: 100%;
+}
+#weiXinFriend .nav .navSmall {
+  width: 5rem;
+  height: 5rem;
+  background: darkgray;
+  position: absolute;
+  top: 80%;
+  right: 5%;
+}
+#weiXinFriend .nav .navSmall img {
+  width: 100%;
+  height: 100%;
+}
+#weiXinFriend .nav .navSmall::before {
+  content: '赵晓凡';
+  position: absolute;
+  left: -80%;
+  top: 20%;
+  color: #f2f2f2;
+  font-weight: 400;
+}
+#weiXinFriend .item {
+  margin-top: 2rem;
+  width: 100%;
+  display: table;
+}
+#weiXinFriend .item .left {
+  display: table-cell;
+  width: 15%;
+  height: 100%;
+}
+#weiXinFriend .item .left .picture {
+  width: 4rem;
+  height: 4rem;
+  padding: 0.5rem;
+}
+#weiXinFriend .item .left .picture img {
+  border: 1px solid #f2f2f2;
+  width: 100%;
+  height: 100%;
+}
+#weiXinFriend .item .right {
+  display: table-cell;
+  padding: 0.5rem;
+  width: 83%;
+}
+#weiXinFriend .item .right .name {
+  color: #12bbee;
+}
+#weiXinFriend .item .right .content {
+  padding-top: 0.5rem;
+}
+#weiXinFriend .item .right .content ul {
+  width: 100%;
+  display: table;
+}
+#weiXinFriend .item .right .content li {
+  padding: 0.5rem;
+  display: table-cell;
+}
+#weiXinFriend .item .right .content li img {
+  width: 100%;
+  height: 100%;
+}
+#weiXinFriend .item .right .content::before {
+  content: "";
+  display: block;
+  position: absolute;
+  /*top:230px;*/
+  bottom: 13px;
+  left: -moz-calc(22%);
+  /*chrome safari*/
+  left: -webkit-calc(22%);
+  left: calc(22%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid #CBCBCE;
+}
+#weiXinFriend .item .right .bottom {
+  width: 100%;
+  line-height: 2rem;
+  padding: 0.3rem;
+  position: relative;
+}
+#weiXinFriend .item .right .bottom img {
+  float: right;
+  width: 1rem;
+  height: 1rem;
+}
+#weiXinFriend .item .right .bottom .praiseACommentBox {
+  float: right;
+  height: 80%;
+  display: inline-block;
+  background: #343434;
+  position: absolute;
+  right: 15%;
+  border-radius: 5px;
+}
+#weiXinFriend .item .right .bottom .praiseACommentBox .praiseAComment li {
+  color: #f2f2f2;
+  display: inline-block;
+  clear: both;
+  content: '';
+  height: 100%;
+  line-height: 1;
+  margin-right: .5rem;
+}
+#weiXinFriend .item .right .bottom .praiseACommentBox .praiseAComment li img {
+  float: left;
+}
+#weiXinFriend .item .right .bottom .praiseACommentBox .praiseAComment.active {
+  display: none;
+}
+#weiXinFriend .item .right .bottom .commentImg {
+  width: 1rem;
+  height: 1rem;
+  float: right;
+  background: darkcyan;
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  margin-top: -0.5rem;
+  background: url('../img/appoint_icon08.png') no-repeat;
+  background-size: cover;
+}
+#weiXinFriend .item .right .comment {
+  width: 100%;
+  background: #cbcbcb;
+  border-radius: 5px;
+}
+#weiXinFriend .item .right .comment .praise {
+  width: 100%;
+  min-height: 1.5rem;
+  line-height: 1.5rem;
+}
+#weiXinFriend .item .right .comment .praise img {
+  width: 100%;
+  height: 100%;
+}
+#weiXinFriend .item .right .comment .commentContent {
+  width: 100%;
+}
+#weiXinFriend .item .right .comment .commentContent li {
+  width: 100%;
+  min-height: 1.5rem;
+  line-height: 1.5rem;
+}
+#weiXinFriend .item .right .comment .commentContent li span:nth-of-type(1) {
+  color: #72b5ee;
+}

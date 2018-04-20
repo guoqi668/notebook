@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            padding: 80px 100px;
+        }
+
+        .csshub-loader {
+            position: relative;
+            width: 2.5em;
+            height: 2.5em;
+            /*transform: rotate(165deg);*/
+            border: 1px #ccc solid;
+
+        }
+
+        .csshub-loader:before, .csshub-loader:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: block;
+            width: 0.5em;
+            height: 0.5em;
+            border-radius: 0.25em;
+            border: 1px #ccc solid;
+            transform: translate(-50%,-50%);
+        }
+
+        .csshub-loader:before {
+            animation: csshub-before 2s infinite;
+        }
+        .csshub-loader:after {
+            animation: csshub-after 2s infinite;
+        }
+        @keyframes csshub-before {
+            0% {
+                width: 0.5em;
+                box-shadow: 1em -0.5em rgba(255,20,98,0.75),-1em 0.5em  rgba(111,202,220,0.75);
+            }
+            50% {
+                width: 2.5em;
+                box-shadow: 0 -0.5em rgba(225, 20, 98, 0.75), 0 0.5em rgba(111, 202, 220, 0.75);
+            }
+            70% {
+                width: 0.5em;
+                box-shadow: -1em -0.5em rgba(225, 20, 98, 0.75),1em 0.5em rgba(111,202,220,0.75);
+            }
+            100% {
+                box-shadow: 1em -0.5em rgba(225,20,98,0.75),-1em 0.5em rgba(111,202,220,0.75)
+            }
+        }
+        @keyframes csshub-after {
+            0% {
+                height: 0.5em;
+                box-shadow: 0.5em 1em  rgba(61, 184, 143, 0.75),-0.5em -1em rgba(233, 169, 32, 0.75);
+            }
+            50% {
+                height: 2.5em;
+                box-shadow: 0.5em 0 rgba(61, 184, 143, 0.75),-0.5em 0 rgba(233, 169, 32, 0.75);
+            }
+            70% {
+                height: 0.5em;
+                box-shadow: 0.5em -1em rgba(61, 184, 143, 0.75), -0.5em 1em rgba(233, 169, 32, 0.75);
+            }
+            100% {
+            box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="csshub-loader"></div>
+</body>
+</html>

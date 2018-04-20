@@ -527,9 +527,13 @@ redux的中间件.中间件就是一个函数，对store.dispatch方法进行了
 - Provider
     * Provider组件是让所有的组件可以访问到store。不用手动去传。也不用手动去监听。
 
-
-
-
+##dva
+- dva 中的 dynamic 解决组件动态加载问题。
+- Model
+    model有 namespace， state，reducers：用于处理同步操作，唯一可以修改 state 的地方。由 action 触发。
+    effects：用于处理异步操作和业务逻辑，不直接修改 state，可以触发 action.
+        put用于触发 action 。call 用于调用异步逻辑，支持 promise . select 用于从 state 里获取数据。
+    subscriptions 用于订阅一个数据源，然后根据需要 dispatch 相应的 action
 
 
 ##http

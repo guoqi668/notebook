@@ -1,0 +1,23 @@
+{
+  "name": "exp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "formidable": "^1.1.1",
+    "jquery": "^3.2.1",
+    "mysql": "^2.15.0"
+  },
+  "devDependencies": {
+    "express-session": "^1.15.6"
+  }
+}

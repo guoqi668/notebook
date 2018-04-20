@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            font-size:50px;
+        }
+        .loading{
+            width:2em;
+            height:2em;
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+        }
+        .out,.in{
+            width:2em;
+            height:2em;
+            position:absolute;
+            margin:100px auto;
+            border-radius: 50%;
+            background: #00e600;
+            animation-name: bounce;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            animation-duration: 2s;
+        }
+        .in{
+            background: #00b600;
+            animation-delay: -1s;
+        }
+        @keyframes bounce {
+            0%,100%{
+                transform:scale(0.0)
+            }
+            50%{
+                transform:scale(1.0)
+            }
+        }
+    </style>
+
+</head>
+<body>
+<div class="loading">
+    <div class="out"></div>
+    <div class="in"></div>
+</div>
+</body>
+</html>

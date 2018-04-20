@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        input[type=file]{
+            display:none;
+        }
+        img{
+            width:300px;
+            height:300px;
+        }
+    </style>
+</head>
+<body>
+<div class="imgbox">
+    <div class="imgnum">
+        <input type="file" class="filepath" multiple accept="image/jpeg,image/png">
+        <span>选择文件</span>
+    </div>
+</div>
+<script src="../轮播/banner%20xz/js/jquery.js"></script>
+<script>
+    //点击span标签相当于点击 input
+    $('span').on('click',function(){
+        $(this).prev().click();
+    })
+$('.filepath').change(function (event) {
+    var files=event.target.files;
+
+    if(files&&files.length>0){
+        file=files[0];
+        console.log(file);
+    }
+    if(!/image\/\w+/.test(file.type)){
+        alert('请选择图片');
+        return;
+    }
+    if(file.size>1024*1024*2){
+        alert('图片大小不能超过2B!');
+        return false;
+    }
+    //获取window的URL工具
+    var URL=window.URL || window.webkitURL;
+    //通过file生成目标url;
+    var imgURL=URL.createObjectURL(file);
+    $('body').append($('<img/>').attr('src',imgURL));
+})
+</script>
+</body>
+</html>

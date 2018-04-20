@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        a {
+            color: #999;
+            text-decoration: none;
+        }
+        .c-search__list {
+            width: 414px;
+            border: 1px #dcdcdc solid;
+            /*display: none;*/
+            height: 0;
+            overflow: hidden;
+        }
+        table{
+            width: 414px;
+            border-collapse: collapse;
+        }
+        th{
+            vertical-align: top;
+            width: 68px;
+            text-align: center;
+            line-height: 32px;
+            color: #999;
+            font-size: 12px;
+            font-weight: 400;
+            border-right: 1px solid #dcdcdc;
+        }
+        td {
+            height: 32px;
+        }
+        .firstId {
+            border-top: 1px solid #dcdcdc;
+        }
+    </style>
+</head>
+<body>
+<input type="text">
+<div class="c-search__list">
+    <table>
+        <tbody>
+        <tr>
+            <th rowspan="3">国家</th>
+            <td>
+                <a href="javascript:;">危地马拉 (GT)</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="javascript:;">瓦努阿图 (VU)</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="javascript:;">委内瑞拉 (VE)</a>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th rowspan="3">州/省</th>
+            <td class="firstId">
+                <a href="javascript:;">华盛顿州(Washington),美国</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="javascript:;">威尔士(Wales),英国</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="javascript:;">维多利亚(Victoria),澳大利亚</a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+<script src="../../node_modules/jquery/dist/jquery.js"></script>
+<script>
+    $('input').on('keyup',function(){
+        if($('input').val()!==''){
+            $('div').show('1000');
+        }
+        else {
+            $('div').hide('1000');
+        }
+    })
+    $('input').on('blur',function (){
+        $('div').hide('1000')
+    })
+    $('input').on('focus',function (){
+        if($('input').val()!==''){
+            $('div').show('1000');
+        }
+    })
+</script>
+</body>
+</html>

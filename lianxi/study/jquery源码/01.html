@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            width:200px;
+            height:100px;
+            display:inline-block;
+            background-color:red;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    div1
+</div>
+<div id="div2">
+    div2
+</div>
+
+<script src="jquery-2.0.3/jquery-2.0.3.js"></script>
+<script>
+    //延迟对象
+//        var df= $.Deferred();
+//        setTimeout(function(){
+//            alert('1');
+//            df.resolve();
+//        },1000);
+//        df.done(function(){
+//            alert('2');
+//        })
+
+    //数据缓存
+    var dat=$('#div1').data('name','hello');
+    console.log(dat.data('name')); //hello
+
+    /*传window:查找速度快 不会找外面的 而且对压缩有好处直接接受为e
+     * 传undefined 防止外部修改了undefined 对jquery内部造成影响.
+    */
+    size='180*120';
+    console.log( typeof size==='string'? parseInt( size.split('*')[0] ):1 )
+    console.log( typeof size==='string'? parseInt( size.split('*')[0] ):1 )
+</script>
+</body>
+</html>

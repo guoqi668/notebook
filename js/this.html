@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    
+    var a = 'window';
+    function p () {
+        var a ='p';
+        return ()=>console.log(this.a);
+    }
+    var o = {a: 'o'};
+    p()() // window
+    p().call(o); // window
+    p.call(o)(); // o
+
+    var b = 'window2';
+    function p1() {
+        var b = 'p2';
+        return function(){
+            console.log(this.b);
+        }
+    }
+    var o2 = {b: 'o2'};
+    p1()(); // window2
+    p1().call(o2); // o2
+    p1.call(o2)(); // window
+
+
+   //  总结： 箭头函数的this指向的是谁调用箭头函数的外层function，箭头函数的this就是指向该对象，如果箭头函数没有外层函数，则指向window
+
+    var name = 'window'
+
+    function Person (name) {
+      this.name = name;
+      this.show1 = function () {
+        console.log(this.name)
+      }
+      this.show2 = () => console.log(this.name)
+      this.show3 = function () {
+        // console.log(this.name);
+        return function () {
+          console.log(this.name)
+        }
+      }
+      this.show4 = function () {
+        return () => console.log(this.name)
+      }
+    }
+    var personA = new Person('personA')
+    var personB = new Person('personB')
+
+    personA.show1() // personA
+    personA.show1.call(personB) // personB
+
+    personA.show2() // personA
+    personA.show2.call(personB)// personA
+
+    personA.show3()() // window
+    personA.show3().call(personB) // personB
+    personA.show3.call(personB)() // window
+
+    personA.show4()() //personA
+    personA.show4().call(personB) // personA
+    personA.show4.call(personB)() // personB
+
+    // 补充： 使用 new 操作符调用构造函数，实际上会经历一下4个步骤：
+
+    // 创建一个新对象；
+
+    // 将构造函数的作用域赋给新对象（因此this就指向了这个新对象）；
+
+    // 执行构造函数中的代码（为这个新对象添加属性）；
+
+    // 返回新对象。
+
+</script>
+</html>

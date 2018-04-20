@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.c-tabs__button {
+			display: inline-block;
+			width: 90px;
+			height: 40px;
+			line-height: 40px;
+			border: 1px solid #ccc;
+			text-align: center;
+		}
+		.c-tabs__button.is-active {
+			background-color: #ccc;
+		}
+		.c-tabs__panel {
+			display: none;
+		}
+
+
+
+
+		.c-switch-zh {
+			display: none;
+		}
+		.c-en {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="js-tabs">
+		<a class="c-tabs__button" data-target='.js-0' href="#">button1</a>
+		<a class="c-tabs__button" data-target='.js-1' href="#">button2</a>
+		<a class="c-tabs__button" data-target='.js-2' href="#">button3</a>
+	</div>
+	<div class="c-tabs__panels">
+		<div class="c-tabs__panel js-0">内
+		容dfg1</div>
+		<div class="c-tabs__panel js-1">内容2</div>
+	</div>
+	<div class="c-tabs__panel js-2">内容3</div>
+	<div class="c-tabs__panel js-0">
+		内容1
+	</div>
+
+
+	<!-- jquery 的toggle方法 -->
+	<a href="#" class="c-switch c-switch-en">切换到英文</a>
+	<a href="#" class="c-switch c-switch-zh">切换到中文</a>
+	<div class="c-des c-zh">
+		中文
+	</div>
+	<div class="c-des c-en">
+		英文
+	</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+
+<script>
+		$( '.js-0' ).show();
+		$('.c-tabs__button').on( 'click', function(event) {
+			if ( event.preventDefault ) {
+				event.preventDefault;
+			} else {
+				event.returnValue = false;
+			}
+			var $this = $( this );
+			var currentId = $this.data( 'target' );
+			$( '.c-tabs__panel' ).hide();
+			$(currentId).show();
+		} )
+
+
+		// toggle方法
+			$('.c-switch').on('click',function(){
+				console.log('a');
+				$('.c-switch').toggle();
+				$('.c-des').toggle();
+			})
+</script>
+</html>

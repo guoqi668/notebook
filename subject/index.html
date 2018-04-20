@@ -1589,6 +1589,15 @@ redux的中间件.中间件就是一个函数，对store.dispatch方法进行了
 </ul>
 </li>
 </ul>
+<h2 id="dva"><a name="user-content-dva" href="#dva" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>dva</h2>
+<ul>
+<li>dva 中的 dynamic 解决组件动态加载问题。</li>
+<li>Model<br />
+    model有 namespace， state，reducers：用于处理同步操作，唯一可以修改 state 的地方。由 action 触发。<br />
+    effects：用于处理异步操作和业务逻辑，不直接修改 state，可以触发 action.<br />
+        put用于触发 action 。call 用于调用异步逻辑，支持 promise . select 用于从 state 里获取数据。<br />
+    subscriptions 用于订阅一个数据源，然后根据需要 dispatch 相应的 action</li>
+</ul>
 <h2 id="http"><a name="user-content-http" href="#http" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>http</h2>
 <ul>
 <li>从输入url到按回车的时候发生了什么？<br />

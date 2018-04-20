@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>表单</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <form role="form">
+        <div class="form-group has-success">
+            <label>用户名:</label>
+            <input type="text" name="name" class="form-control" placeholder="请输入用户名">
+        </div>
+        <div class="form-group has-error">
+            <label>密码:</label>
+            <input type="password" name="password" class="form-control" placeholder="请输入密码">
+        </div>
+        <div class="form-group">
+            <label>性别:</label>
+            <input type="radio" name="sex" value="男">男
+            <input type="radio" name="sex" value="女">女
+
+        </div>
+
+        <div class="form-group has-warning">
+            <label>兴趣:</label>
+            <select class="form-control">
+                <option>--请选择--</option>
+                <option value="篮球">篮球</option>
+                <option value="科比">科比</option>
+                <option value="乔丹">乔丹</option>
+                <option value="库里">库里</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>头像:</label>
+            <input type="file" name="pic">
+        </div>
+
+        <input type="submit" value="提交" class="btn btn-success">
+        <input type="reset" value="重置" class="btn btn-info">
+
+    </form>
+</body>
+</html>

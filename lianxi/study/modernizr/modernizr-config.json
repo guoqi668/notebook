@@ -1,0 +1,11 @@
+{
+  "minify": false,
+  "classPrefix": "mod-",
+  "options": [
+    "setClasses"
+  ],
+  "feature-detects": [
+    "test/css/gradients",
+    "test/video"
+  ]
+}

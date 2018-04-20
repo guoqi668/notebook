@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.css">
+    <style>
+        .btnContainer {
+            width: 40px;
+            height: 200px;
+            border: 1px solid #ccc;
+            line-height: 40px;
+            position: relative;
+        }
+        .btnlist {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            transition: 0.3s ease-out;
+        }
+        .btnlist:hover {
+            width: 110px;
+            background-color: red;
+        }
+
+        .icon {
+            margin-left: 13px;
+        }
+        #sharebtn {
+            top: 40px;
+        }
+        /*a:focus {
+            color: red;
+        }*/
+        a:link {
+            color:#FF0000;
+            text-decoration:underline;
+        }
+        a:visited {
+            color:#00FF00;
+            text-decoration:none;
+        }
+        a:hover {
+            color:#000000;
+            text-decoration:none;
+        }
+        a:active {
+            color:#FFFFFF;
+            text-decoration:none;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="https://www.baidu.com" target="_blank">百度一下</a>
+    <a href="https://www.baidu.com" target="_blank">百度一下</a>
+    <div class="btnContainer">
+        <div class="btnlist js-actions_compare" id="contrast" data-listing="1234">
+            <div class="btns">
+                <span class="fa fa-plus icon" aria-hidden="true"></span>
+                <span class="btns-info">加入对比</span>
+            </div>
+        </div>
+        <div tabindex="0" class="btnlist" id="sharebtn" data-action="">
+            <div class="btns"><span class="fa fa-share-square-o icon" aria-hid  den="   true"></span>
+                <span class="share-to btns-info">分享到：</span>
+                <div class="social-share"></div>
+            </div>
+        </div>
+
+    </div>
+    <a href="#" target="_blank" tabindex="2">W3School</a><br />
+    <a href="http://www.google.com/" tabindex="-1">Google</a><br />
+    <a href="http://www.microsoft.com/" tabindex="3">Microsoft</a>
+    <input type="text">
+
+
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../node_modules/jquery.qrcode/jquery.qrcode.min.js"></script>
+<script>
+
+
+    class SocialShare {
+        constructor(options){
+            if(!(this instanceof SocialShare )){
+                return new SocialShare(options);
+            }
+            var defaults = {
+                url: location.href,
+                sitesIcons: {
+                    weibo: 'fa-weibo',
+                    wechat: 'fa-wechat',
+                    facebook: 'fa-facebook-official',
+                    twitter: 'fa-twitter',
+                    linkdin: 'fa-linkdin',
+                    google: 'fa-google',
+                    qq: 'fa-qq'
+                }
+            }
+            this.data = $.extend({},defaults,options);
+
+        }
+    }
+    var social = new SocialShare();
+    social.init();
+//    var wechat = $('.icon-wechat');
+//    wechat.append('<div class="wechat-qrcode"><h4>分享到朋友圈</h4> <div id="qrcode"></div></div>');
+//    wechat.find('#qrcode').qrcode({
+//        width: 100,
+//        height: 100,
+//        text: 'www.baidu.com'
+//    })
+
+</script>
+</body>
+</html>
