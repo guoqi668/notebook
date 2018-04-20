@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <style>
+        li {
+            list-style:none;
+        }
+        a {
+            text-decoration:none;
+        }
+        .left, .right {
+            float: left;
+        }
+        /*今日排行版*/
+        .dayBox {
+            width:400px;
+            overflow:hidden;
+            position:relative;
+            background:pink;
+        }
+        .dayBox table {
+            width: 100%;
+            height: 100%;
+            border: 5px solid #dea42c;
+            border-top: 0;
+
+        }
+        .dayBox thead {
+            /*position: relative;*/
+            /*width: 100%;*/
+            height: 40px;
+            line-height: 40px;
+            position: absolute;
+            background: #dea42c;
+            z-index: 20;
+        }
+        .dayBox td{
+            width: 100px;
+        }
+        .dayBox .scroll {
+            /*height的大小是根据显示tr的条数*tr的高度度得到的2倍，需注意！，这里是 5*60*2 */
+            /*height: 600px;*/
+            position:absolute;
+            left:0px;
+            /*top:40px;*/
+        }
+
+        .dayBox .scroll tr {
+            height:60px;
+            border-bottom: 1px solid #dea42c;
+            text-align:center;
+        }
+
+
+        /*最新喜讯向左滚动部分*/
+        li {
+            list-style:none;
+        }
+        a {
+            text-decoration:none;
+        }
+        .winBox {
+            width:500px;
+            height:40px;
+            overflow:hidden;
+            position:relative;
+            background:pink;
+        }
+        .scrollLeft {
+            /*width的大小是根据显示li的条数*li的宽度得到的2倍，需注意！，这里是 5*150*2 */
+            width:1500px;
+            position:absolute;
+            left:0px;
+            top:0px;
+        }
+        .scrollLeft li {
+            width:150px;
+            float:left;
+            line-height:40px;
+            text-align:center;
+        }
+
+        /*最新喜讯*/
+        .newsBox {
+            width:400px;
+            overflow:hidden;
+            position:relative;
+            background:pink;
+        }
+        .newsBox table {
+            width: 100%;
+            height: 100%;
+            border: 5px solid #dea42c;
+            border-top: 0;
+
+        }
+        .newsBox thead {
+            height: 40px;
+            line-height: 40px;
+            position: absolute;
+            background: #dea42c;
+            z-index: 20;
+        }
+        .newsBox td{
+            width: 100px;
+        }
+        .newsBox .scroll {
+            position:absolute;
+            left:0px;
+        }
+
+        .newsBox .scroll tr {
+            height:40px;
+            border-bottom: 1px solid #dea42c;
+            text-align:center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="left">
+        <!-- 日销量 -->
+        <div class="dayBox">
+            <table>
+                <thead>
+                    <tr>
+                        <td>名次</td>
+                        <td>姓名</td>
+                        <td>今日销售额</td>
+                        <td>订单数</td>
+                    </tr>
+                </thead>
+                <tbody class="scroll">
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>1</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>2</td> 
+                    </tr> 
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>3</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>4</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>5</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>6</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>7</td> 
+                    </tr> 
+                    <!-- 复制一份 -->
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>1</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>2</td> 
+                    </tr> 
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>3</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>4</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>5</td> 
+                    </tr>
+                     <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>6</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>7</td> 
+                    </tr> 
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+   
+    
+    <div class="right">
+        <!-- 最新喜讯向左滚动部分 -->
+        <div class="winBox" style="margin-left: 20px;">
+            <ul class="scrollLeft">
+                <li><a href="#">时尚休闲裤68元</a></li>
+                <li><a href="#">羊呢绒套衫38元</a></li>
+                <li><a href="#">新款雪地靴88元</a></li>
+                <li><a href="#">加厚法兰绒108元</a></li>
+                <li><a href="#">连裤袜19元2双</a></li>
+                <!--给所要的内容复制一份-->
+                <li><a href="#">时尚休闲裤68元</a></li>
+                <li><a href="#">羊呢绒套衫38元</a></li>
+                <li><a href="#">新款雪地靴88元</a></li>
+                <li><a href="#">加厚法兰绒108元</a></li>
+                <li><a href="#">连裤袜19元2双</a></li>
+            </ul>
+        </div>
+        <!-- 最新喜讯 -->
+        <div class="newsBox" style="margin-left: 20px;">
+            <table>
+                <thead>
+                     <tr>
+                        <td>名次</td>
+                        <td>姓名</td>
+                        <td>今日销售额</td>
+                        <td>订单数</td>
+                    </tr>
+                </thead>
+               
+                <tbody class="scroll">
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>1</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>2</td> 
+                    </tr> 
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>3</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>4</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>5</td> 
+                    </tr> 
+                    <!-- 复制一份 -->
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>1</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>2</td> 
+                    </tr> 
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>3</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>4</td> 
+                    </tr>
+                    <tr>
+                        <td>NO.4</td>
+                        <td>陈菲菲</td>
+                        <td>￥180000</td>
+                        <td>5</td> 
+                    </tr> 
+                </tbody>
+                
+            </table>
+        </div>
+
+        
+    </div>
+    
+
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script>
+    // table从下向上滚动
+     function scrollTop(box) {
+        var num = 0;
+        // 得到表格要显示数据的条数
+        var count = $(box+' tbody tr').length/2;
+        // 获取tr的高度，包括 边框
+        var trHeight = $(box+' tbody tr').outerHeight();
+        // 获取表头的高度
+        var theadHeight = $(box+' thead').height();
+        // 设置整个的高度
+        $(box).height(count*trHeight+theadHeight);
+        // 设置 滚动部分 top值; 设置滚动的高度： 条数*高度*2
+        $(box+' .scroll').css({top:theadHeight, height:count*trHeight*2});
+        function goLeft() {
+            //根据显示li的条数*li的高度得到
+            if (num == -(count*trHeight)) {
+                num = 0;
+            }
+            num -= 1;
+            $(box+' .scroll').css({
+                // 加 thead的高度
+                top: num+theadHeight
+            })
+        }
+        //设置滚动速度
+        var timer = setInterval(goLeft, 20);
+        //设置鼠标经过时滚动停止, 如果不需要可以去掉
+        $(box).hover(function() {
+            clearInterval(timer);
+        },
+        function() {
+            timer = setInterval(goLeft, 20);
+        })
+    }
+    scrollTop('.dayBox');
+    scrollTop('.newsBox');
+
+
+    // 文字从右向左滚动函数
+    $(function() {
+        var num = 0;
+        function goLeft() {
+            //750是根据显示li的条数*li的宽度得到的
+            if (num == -750) {
+                num = 0;
+            }
+            num -= 1;
+            $(".scrollLeft").css({
+                left: num
+            })
+        }
+        //设置滚动速度
+        var timer = setInterval(goLeft, 20);
+    })
+
+    $.ajax({
+        url: 'https://bcart.883284.com/Api/Index/index',
+        method: 'get',
+        success:function(data,textStatus,jqXHR){
+        console.log(data)
+        console.log(textStatus)
+        console.log(jqXHR)
+    },
+    })
+</script>
+</html>
